@@ -6,7 +6,7 @@
     <body>
         <div id="container">
             <div class="title">
-                <h1>Online Compiler Using Flask</h1>
+                <h1>Online Compiler Using Flask MicroFramework (Currently runs gcc 4.8.2) More languages will be added soon </h1>
             </div>
             <div id="content">
                 <form method="post" action="{{ url_for('hello') }}">
@@ -14,18 +14,15 @@
                   <input type="text" name="yourname" /><br />
                   <label for="youremail">Enter filename</label>
                   <input type="text" name="youremail" /><br />
-                  <textarea name="code" rows="60" cols="90">Enter the cpp code</textarea>
+                  <textarea name="code" rows="15" cols="90">Enter your c code here</textarea>
                   <input type="submit"/>
                 </form>
             </div>
-            <div class="title">
-                <h1>Flask code</h1>
-            </div>
-                <code><pre>
-@app.route('/')
-def form():
-    return render_template('form_submit.html')
-                </pre></code>
+           <div class="title" style="padding-top:6px">
+               Developer : <a style="color:#FFFFFF" href="http://creativcoder.wordpress.com">Creativcoder</a>
+               <p>Follow Me on Twitter:</p><a href="http://twitter.com/creativcoder"></a>
+           </div>
+                
             </div>
         </div>
     </body>
