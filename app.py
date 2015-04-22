@@ -16,7 +16,7 @@ def comp_cmds(lang):
 	if lang=='python':
 		return subprocess.Popen(['python','main.py'],stdout=subprocess.PIPE,stderr=subprocess.PIPE)
 	elif lang=='c':
-		return subprocess.Popen(['gcc','main.c','-o','main'],stdout=subprocess.PIPE,stderr=subprocess.PIPE)
+		return subprocess.Popen(['gcc',os.path.dirname(os.path.abspath(__file__))+'/main.c','-o','main'],stdout=subprocess.PIPE,stderr=subprocess.PIPE)
 
 @app.route('/hello/', methods=['POST'])
 def hello():
