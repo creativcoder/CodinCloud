@@ -6,7 +6,8 @@ import time
 
 app = Flask(__name__)
 
-subprocess.Popen(['rm',os.path.dirname(os.path.abspath(__file__))+'/main'])
+#subprocess.Popen(['rm',os.path.dirname(os.path.abspath(__file__))+'/main'])
+subprocess.Popen(['gcc',os.path.dirname(os.path.abspath(__file__))+'/temp.c','-o','main'])
 @app.route('/')
 def form():
 
