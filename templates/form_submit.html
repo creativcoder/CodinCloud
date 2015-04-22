@@ -10,17 +10,19 @@
             </div>
             <div id="content">
                 <form method="post" action="{{ url_for('hello') }}">
+                  <img alt="My shiny new logo" style="float:right" src="{{url_for('static',filename='logo.png')}}">
                   <label for="yourname">Project Name</label>
-                  <input type="text" name="yourname" /><br />
+                  <input placeholder="Type anything" type="text" name="yourname" /><br />
+
                   <label for="youremail">Enter filename</label>
-                  <input type="text" name="youremail" /><br />
-                  <textarea name="code" rows="15" cols="90">Enter your c code here</textarea>
+                  <input placeholder="same here dude ! anything" type="text" name="youremail" /><br />
+                  <textarea name="code" rows="15" cols="90">This is the fun part !. Type some c code...</textarea>
                   <input type="submit"/>
                 </form>
             </div>
-           <div class="title" style="padding-top:6px">
-               Developer : <a style="color:#FFFFFF" href="http://creativcoder.wordpress.com">Creativcoder</a>
-               <p>Follow Me on Twitter:</p><a href="http://twitter.com/creativcoder"></a>
+           <div class="title" style="padding-top:2px">
+               Developer : <a style="color:#FFFFFF" href="http://creativcoder.wordpress.com">Creativcoder</a><br>
+              <a style="color:#FFFFFF" href="http://twitter.com/creativcoder">Follow Me On Twitter</a>
            </div>
                 
             </div>
