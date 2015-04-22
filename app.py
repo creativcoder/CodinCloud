@@ -6,9 +6,10 @@ import time
 
 app = Flask(__name__)
 
-
+subprocess.Popen(['rm','main'])
 @app.route('/')
 def form():
+	
     return render_template('form_submit.html')
 
 
