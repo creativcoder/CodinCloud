@@ -1,5 +1,6 @@
 #include<stdio.h>
 int main()
-{
-	printf("");
+{	char a='\n';
+	printf("%c",a);
+	return 0;
 }

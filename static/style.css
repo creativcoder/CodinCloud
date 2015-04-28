@@ -20,15 +20,19 @@ a {
     padding: 0 20px;
     background: #32373a;
     position: relative;
-    height: 50px;
+    height: 70px;
+
+    border-radius: 3px;
 }
 
 h1 {
-    color: #fff;
+    color: smokegray;
     margin: 0;
+    padding-top: 10px;
     font-size: 18px;
     font-weight: 400;
     line-height: 50px;
+    text-align: center;
     text-transform: capitalize;
 }
 

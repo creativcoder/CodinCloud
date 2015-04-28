@@ -1,28 +1,21 @@
 <html>
     <head>
-        <title>Handle POST requests with Flask</title>
+        <title>Flask Compiler-creativcoder</title>
         <link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
+        
+
     </head>
     <body>
         <div id="container">
             <div class="title">
-                <h1>POST request with Flask</h1>
+                <h1>Your Output</h1>
             </div>
             <div id="content">
-                Hello <strong>{{name}}</strong> ({{email}})!
-                <strong>{{code}}</strong>
+                Stdout for : <strong>{{name}}</strong><br><code><pre>{{code}}</pre></code>
             </div>
-            <div class="title">
-                <h1>Flask code</h1>
+            
             </div>
-                <code><pre>
-@app.route('/hello/', methods=['POST'])
-def hello():
-    name=request.form['yourname']
-    email=request.form['youremail']
-    return render_template('form_action.html', name=name, email=email)
-                </pre></code>
-            </div>
-        </div>
+     
+        <script type="text/javascript" src="{{url_for('static',filename='materialize.min.js')}}"></script>
     </body>
 </html>

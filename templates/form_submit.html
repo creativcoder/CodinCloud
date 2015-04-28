@@ -1,7 +1,9 @@
 <html>
     <head>
-        <title>Handle POST requests with Flask</title>
+        <title>Flask Compiler-creativcoder</title>
         <link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
+        <link rel="stylesheet" href="{{url_for('static',filename='default.css')}}">
+        
     </head>
     <body>
         <div id="container">
@@ -9,23 +11,25 @@
                 <h1>Online Compiler Using Flask MicroFramework (Currently runs gcc 4.8.2) More languages will be added soon </h1>
             </div>
             <div id="content">
-                <form method="post" action="{{ url_for('hello') }}">
-                  <img alt="My shiny new logo" style="float:right" src="{{url_for('static',filename='logo.png')}}">
-                  <label for="yourname">Project Name</label>
-                  <input placeholder="Type anything" type="text" name="yourname" /><br />
+                <form method="post" action="{{ url_for('.compile') }}">
+                  <img alt="AeonLogo" style="float:right" src="{{url_for('static',filename='logo.png')}}">
 
-                  <label for="youremail">Enter filename</label>
-                  <input placeholder="same here dude ! anything" type="text" name="youremail" /><br />
-                  <textarea name="code" rows="15" cols="90">This is the fun part !. Type some c code...</textarea>
-                  <input type="submit"/>
+                  <label for="language">Project Name</label>
+                  <input placeholder="Type anything" type="text" name="language" required><br />
+                  <label for="filename">Enter filename</label>
+                  <input placeholder="same here dude ! anything" type="text" name="filename" required><br />
+                  <textarea class="c"  name="code" rows="15" cols="90" required></textarea><br><br>
+                  <input type="submit" value="Compile"/>
                 </form>
             </div>
            <div class="title" style="padding-top:2px">
                Developer : <a style="color:#FFFFFF" href="http://creativcoder.wordpress.com">Creativcoder</a><br>
               <a style="color:#FFFFFF" href="http://twitter.com/creativcoder">Follow Me On Twitter</a>
            </div>
-                
+                <script type="text/javascript">hljs.initHighlightingOnLoad();</script>
             </div>
         </div>
+      
+        <script type="text/javascript" src="{{url_for('static',filename='highlight.pack.js')}}"></script>
     </body>
 </html>
