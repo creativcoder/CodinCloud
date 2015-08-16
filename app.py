@@ -1,9 +1,11 @@
 import os
 import config
+import logging
 from task_handler import CodeTask
 
 from flask import Flask,request,render_template,url_for,jsonify
 
+logging.basicConfig(level=logging.DEBUG)
 
 app=Flask(__name__)
 
@@ -16,14 +18,19 @@ def index():
 @app.route('/compile',methods=['POST'])
 def compile():
 	valu=request.form["edit"]
-	#print valu
+
+	logging.debug(valu)
+	
 	if valu == '':
 		return render_template('error.html')
 	new_task=CodeTask(2)
 	output_result = new_task.compile(request.form['filename_field'],valu)
-	print output_result
-	return render_template('output.html',output="gkjh{}gkjh".format(output_result))
-	#return request.form['filename_field']
+	
+	loggin.debug(output_result)
+	logging.debug(request.form['filename_field'])
+	
+	return render_template('output.html',output=output_result)
+	
 
 @app.route('/about_page')
 def about_page():
@@ -33,7 +40,6 @@ def about_page():
 @app.route('/login')
 def login():
 	return render_template('login.html')
-	#return "Your have successfully logged in"
 
 if __name__=='__main__':
 	port = int(os.environ.get("PORT", 3000))
