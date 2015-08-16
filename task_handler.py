@@ -3,6 +3,9 @@ import time
 import sys
 import os
 from languages import language_dict
+import logging
+
+logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
 
 class CodeTask:
 
@@ -29,6 +32,7 @@ class CodeTask:
 		self.o.close()
 		#subprocess.Popen(['gcc',os.path.dirname(os.path.abspath(__file__))+'/{}.c'.format(self.file_name),'-o','main'])
 		self.output_string = subprocess.Popen(['python',os.path.dirname(os.path.abspath(__file__))+'/{}.py'.format(self.file_name)],stdout=subprocess.PIPE,stderr=subprocess.PIPE)
+		#logging.debug(self.output_string)
 		time.sleep(0.7)	
 		#self.output_string = subprocess.Popen([os.path.dirname(os.path.abspath(__file__))+'/main'],stdout=subprocess.PIPE,stderr=subprocess.PIPE)
 		print self.output_string.stdout.read()

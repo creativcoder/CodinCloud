@@ -4,6 +4,7 @@ from task_handler import CodeTask
 
 from flask import Flask,request,render_template,url_for,jsonify
 
+
 app=Flask(__name__)
 
 app.secret = config.KEY
@@ -15,12 +16,13 @@ def index():
 @app.route('/compile',methods=['POST'])
 def compile():
 	valu=request.form["edit"]
-	print valu
+	#print valu
 	if valu == '':
 		return render_template('error.html')
 	new_task=CodeTask(2)
-	output = new_task.compile(request.form['filename_field'],valu)
-	return render_template('output.html',output=output)
+	output_result = new_task.compile(request.form['filename_field'],valu)
+	print output_result
+	return render_template('output.html',output="gkjh{}gkjh".format(output_result))
 	#return request.form['filename_field']
 
 @app.route('/about_page')
