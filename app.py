@@ -26,7 +26,7 @@ def compile():
 	new_task=CodeTask(2)
 	output_result = new_task.compile(request.form['filename_field'],valu)
 	
-	loggin.debug(output_result)
+	logging.debug('Code ran successfully with output: '+output_result)
 	logging.debug(request.form['filename_field'])
 	
 	return render_template('output.html',output=output_result)

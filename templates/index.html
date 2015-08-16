@@ -5,6 +5,7 @@
 	<link rel="stylesheet" type="text/css" href="{{url_for('static',filename='css/materialize.min.css')}}">
 	<link rel="stylesheet" type="text/css" href="{{url_for('static',filename='css/style.css')}}">
 	<style type="text/css" media="screen">
+
     #editor { 
         position: absolute;
         top: 0;
@@ -28,14 +29,17 @@
       </ul>
     </div>
   </nav>
-
-<div style="float:left" class="container">
-
-<a href="#NEXTPALIN">Current Problem : NEXT PALINDROM</a>
-
+<div class="row">
+<div style="float:left" class="col s3">
+<div class="collection">
+        <a href="#!" class="collection-item">Next Palindrome</a>
+        <a href="#!" class="collection-item active">Even Fibonacci</a>
+        <a href="#!" class="collection-item">Combi Tree</a>
+        <a href="#!" class="collection-item">Polish Notation Parser</a>
+      </div>
 </div>
 
-	<div style="float:right" class="container">
+	<div style="float:right" class="col s9">
 		<form class="row" action="{{url_for('compile')}}" method="post">
 		<div class="row">
 			<input type="text" value="" name="filename_field" placeholder="Enter Filename"/>
@@ -45,30 +49,41 @@
 			<!-- <label>Type your code here</label> -->
 			
 				<div name="editor" id="editor">#Type your code here
-</div>
-			<br/>
-			<br/>
+				</div>
+				
+				<br/>
+				<br/>
 
 				<!-- <button class="waves-effect wave-teal btn" type="submit" >Compile</button> -->
 			</div>
 			<textarea id="textarea-code" hidden type="text" name="edit"></textarea>
 			<br/>
 			<!-- <button class="waves-effect wave-teal btn" onclick="">Save</button> -->
-				<button class="waves-effect wave-teal btn" type="submit" onclick="getCodeSnippet()">Compile</button>
+				
 <!-- Select Language Badge  -->
-				<ul style="float:right" id="dropdown2" class="dropdown-content">
-        	<li><a href="#!">Python<span class="badge">1</span></a></li>
-        	<li><a href="#!">C/C++<span class="badge">1</span></a></li>
-        	<li><a href="#!">Java</a></li>
-      	</ul>
-      		<a class="btn dropdown-button" href="#!" data-activates="dropdown2">Select Language<i class="mdi-navigation-arrow-drop-down right"></i></a>
+				
+      		<!-- <a class="btn dropdown-button" href="#!" data-activates="dropdown2">Select Language<i class="mdi-navigation-arrow-drop-down right"></i></a> -->
 <!-- Select Language Badge -->
+<div class="language-div" >
+<label>Select Language</label>
+    <select class="browser-default">
+      <option value="" disabled selected>Languages</option>
+      <option value="1">C++</option>
+      <option value="2">Python</option>
+      <option value="3">Java</option>
+      <option value="3">Rust</option>
+      <option value="3">Ruby</option>
+      <option value="3">Nodejs</option>
+    </select>
+</div>
+<button style="margin-top:10px" class="waves-effect wave-teal btn" type="submit" onclick="getCodeSnippet()">Compile</button>
 		</form>
 		<div class="row">
 			<p>OUTPUT : {{code}}</p>
 		</div>
-	</div>
 
+	</div>
+</div>
 
 	<script type="text/javascript" src="{{url_for('static',filename='js/jquery-2.1.1.min.js')}}"></script>
 	<script type="text/javascript" src="{{url_for('static',filename='js/materialize.js')}}"></script>
@@ -76,15 +91,17 @@
 <script src="{{url_for('static',filename="ace-builds/src-noconflict/ace.js")}}" type="text/javascript" charset="utf-8"></script>
 
 <script>
+
     var editor = ace.edit("editor");
     editor.setTheme("ace/theme/monokai");
     editor.getSession().setMode("ace/mode/python");
-
     function getCodeSnippet(){
     var snippet=editor.getValue();
     var textar=document.getElementById("textarea-code").value=snippet;
     alert("Your code has been saved");
 }
+
 </script>
+
 </body>
 </html>
