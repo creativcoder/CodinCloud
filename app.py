@@ -2,6 +2,8 @@ import os
 import config
 import logging
 from task_handler import CodeTask
+import subprocess
+
 
 from flask import Flask,request,render_template,url_for,jsonify
 
@@ -15,22 +17,30 @@ app.secret = config.KEY
 def index():
 	return render_template('index.html')
 
-@app.route('/compile',methods=['POST'])
+@app.route('/compile',methods=['GET','POST'])
 def compile():
-	valu=request.form["edit"]
+	source_code=request.form["edit"]
 
-	logging.debug(valu)
+	logging.debug("This is the source code :: "+source_code)
 	
-	if valu == '':
+	if source_code == '':
 		return render_template('error.html')
-	new_task=CodeTask(2)
-	output_result = new_task.compile(request.form['filename_field'],valu)
+	
+	new_task=CodeTask(1)
+	output_result = new_task.compile(request.form['filename_field'],source_code)
 	
 	logging.debug('Code ran successfully with output: '+output_result)
-	logging.debug(request.form['filename_field'])
+	logging.debug('Filename field is  :'+request.form['filename_field'])
 	
 	return render_template('output.html',output=output_result)
 	
+
+@app.route('/test')
+def test():
+	subprocess.Popen(['gcc',os.path.abspath('temp.c')])
+	output = subprocess.Popen([os.path.abspath('a.out')],stdout=subprocess.PIPE,stderr=subprocess.PIPE)
+	#logging.debug(output.stdout.read())
+	return render_template('error.html',output=output.stdout.read())
 
 @app.route('/about_page')
 def about_page():

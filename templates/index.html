@@ -6,20 +6,14 @@
 	<link rel="stylesheet" type="text/css" href="{{url_for('static',filename='css/style.css')}}">
 	<style type="text/css" media="screen">
 
-    #editor { 
-        position: absolute;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 0;
-    }
+    
 </style>
 </head>
 <body>
 
 	<nav>
     <div class="nav-wrapper">
-      <a href="#" class="brand-logo">&nbsp;&nbsp;Pyjudge - Online Code Judge Platform</a>
+      <a href="#" class="brand-logo" id="header-logo">Compiler as a Service Platform</a>
       <ul id="nav-mobile" class="right hide-on-med-and-down">
         <li><a href="components.html">Problem Archive</a></li>
         <li><a href="{{url_for('login')}}">Login</a></li>
@@ -42,7 +36,7 @@
 	<div style="float:right" class="col s9">
 		<form class="row" action="{{url_for('compile')}}" method="post">
 		<div class="row">
-			<input type="text" value="" name="filename_field" placeholder="Enter Filename"/>
+			<input style="padding-top:20px" type="text" value="" required name="filename_field" placeholder="Enter Filename (without extension)"/>
 			</div>
 			<div id="code-box" class="input-field">
 			
@@ -60,13 +54,10 @@
 			<br/>
 			<!-- <button class="waves-effect wave-teal btn" onclick="">Save</button> -->
 				
-<!-- Select Language Badge  -->
-				
-      		<!-- <a class="btn dropdown-button" href="#!" data-activates="dropdown2">Select Language<i class="mdi-navigation-arrow-drop-down right"></i></a> -->
-<!-- Select Language Badge -->
 <div class="language-div" >
 <label>Select Language</label>
-    <select class="browser-default">
+
+    <select class="language-option">
       <option value="" disabled selected>Languages</option>
       <option value="1">C++</option>
       <option value="2">Python</option>
@@ -75,11 +66,12 @@
       <option value="3">Ruby</option>
       <option value="3">Nodejs</option>
     </select>
+
 </div>
 <button style="margin-top:10px" class="waves-effect wave-teal btn" type="submit" onclick="getCodeSnippet()">Compile</button>
 		</form>
 		<div class="row">
-			<p>OUTPUT : {{code}}</p>
+			<p class="output">OUTPUT : {{code}}</p>
 		</div>
 
 	</div>
@@ -92,14 +84,35 @@
 
 <script>
 
+code_templates = {
+  1:"#include<stdio.h>\nint main()\n{\nprintf(\"Hello World\");\n}",
+  2:"print(\"Hello\")",
+  3:""
+}
+
     var editor = ace.edit("editor");
     editor.setTheme("ace/theme/monokai");
     editor.getSession().setMode("ace/mode/python");
-    function getCodeSnippet(){
+    
+    var getCodeSnippet = function (){
     var snippet=editor.getValue();
-    var textar=document.getElementById("textarea-code").value=snippet;
-    alert("Your code has been saved");
-}
+    
+    var textar=document.getElementById('textarea-code').value=snippet;
+    console.log(textar);
+    console.log($(".language-option option[value='2']").text())
+    /*$.getJSON('/compile', {"junk":"junk"}, function(json, textStatus) {
+        
+        alert("We will show the output on the screen");
+        $('.output').text(json.result);
+
+
+    });*/
+    //alert("Your code has been saved");
+}  ;
+        //getCodeSnippet();
+
+   
+    
 
 </script>
 
