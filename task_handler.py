@@ -2,7 +2,7 @@ import subprocess
 import time
 import sys
 import os
-from languages import language_dict
+
 import logging
 
 logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
