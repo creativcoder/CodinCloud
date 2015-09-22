@@ -1,59 +1,57 @@
-
-from flask import Flask, render_template, request, url_for
-import subprocess
 import os
-import time
+import config
+import logging
+from task_handler import CodeTask
+import subprocess
 
-app = Flask(__name__)
 
-#subprocess.Popen(['rm',os.path.dirname(os.path.abspath(__file__))+'/main'])
-subprocess.Popen(['gcc',os.path.dirname(os.path.abspath(__file__))+'/temp.c','-o','main'])
+from flask import Flask,request,render_template,url_for,jsonify
+
+logging.basicConfig(level=logging.DEBUG)
+
+app=Flask(__name__)
+
+app.secret = config.KEY
+
 @app.route('/')
-def form():
-	return render_template('form_submit.html')
+def index():
+	return render_template('index.html')
 
-
-def comp_cmds(lang):
-	if lang=='python':
-		return subprocess.Popen(['python','main.py'],stdout=subprocess.PIPE,stderr=subprocess.PIPE)
-	elif lang=='c':
-		return subprocess.Popen(['gcc',os.path.dirname(os.path.abspath(__file__))+'/main.c','-o','main'],stdout=subprocess.PIPE,stderr=subprocess.PIPE)
-
-@app.route('/compile', methods=['POST'])
+@app.route('/compile',methods=['GET','POST'])
 def compile():
-    name=request.form['language']
-    email=request.form['filename']
-    src_code=request.form['code']
-    if len(src_code)==0:return render_template('404.html')
-    f=open('main.c','w')
-    f.write(src_code)
-    cmd=comp_cmds('c')
-    f.close()
-    time.sleep(0.7)
-    actual=subprocess.Popen(['./main'],stdout=subprocess.PIPE,stderr=subprocess.PIPE)
-    srcode=actual.stdout.read()#request.form['code']
-    subprocess.Popen(['rm','main'],stdout=subprocess.PIPE,stderr=subprocess.PIPE)
-    #fil=open('srcode.c','w')
-    #fil.write(srcode)
-    
-    #mem=subprocess.Popen(['date'],stdout=subprocess.PIPE)
-    
-    #out.mem.stdout.read()
-    #reader=open('srcode.c','r')
-    
-    #os.system('./srcode')
-    #out=open('output','r')
+	source_code=request.form["edit"]
+	
+	logging.debug("This is the source code :: "+source_code)
+	
+	if source_code == '':
+		return render_template('error.html')
+	
+	new_task=CodeTask(1)
+	output_result = new_task.compile(request.form['filename_field'],source_code)
+	
+	logging.debug('Code ran successfully with output: '+output_result)
+	logging.debug('Filename field is  :'+request.form['filename_field'])
+	
+	return render_template('output.html',output=output_result)
+	
 
-    #output=out.read()
-    #print out
-    return render_template('form_action.html', name=name, email=email,code=srcode)
+@app.route('/test')
+def test():
+	subprocess.Popen(['gcc',os.path.abspath('temp.c')])
+	output = subprocess.Popen([os.path.abspath('a.out')],stdout=subprocess.PIPE,stderr=subprocess.PIPE)
+	#logging.debug(output.stdout.read())
+	return render_template('error.html',output=output.stdout.read())
 
-# Run the app :)
-if __name__ == '__main__':
-    
-    port = int(os.environ.get("PORT", 3000))
-    app.run(host='0.0.0.0', port=port)
-  # app.run( 
-  #       host="0.0.0.0",
-  #       port=int("5000")
-  # )
+@app.route('/about_page')
+def about_page():
+	return "PyJudge is an Online compiler made by the Flask MicroFramework"
+
+#--------NEED TO WORK ON--------------------------------------------------
+@app.route('/login')
+def login():
+	return render_template('login.html')
+
+if __name__=='__main__':
+	port = int(os.environ.get("PORT", 3000))
+	app.run(host='0.0.0.0', port=port,debug=True)
+	
