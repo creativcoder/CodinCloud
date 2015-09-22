@@ -34,6 +34,7 @@
 </div>
 
 	<div style="float:right" class="col s9">
+    <button class="waves-effect wave-teal btn" onclick="getCodeSnippet()">Save</button>
 		<form class="row" action="{{url_for('compile')}}" method="post">
 		<div class="row">
 			<input type="text" value="" required name="filename_field" placeholder="Enter Filename (without extension)"/>
@@ -57,13 +58,12 @@
 				
 				<br/>
 				<br/>
-
-				<!-- <button class="waves-effect wave-teal btn" type="submit" >Compile</button> -->
 			</div>
 			<textarea id="textarea-code" hidden type="text" name="edit"></textarea>
 			<br/>
-			<!-- <button class="waves-effect wave-teal btn" onclick="">Save</button> -->
-				
+			
+
+				<button style="margin-top:10px" class="waves-effect wave-teal btn" type="submit" onclick="getCodeSnippet()">Compile</button>
 
 <form class="col s12">
       <div class="row">
@@ -76,8 +76,9 @@
 
 
 <br> <br> 
-<button style="margin-top:10px" class="waves-effect wave-teal btn" type="submit" onclick="getCodeSnippet()">Compile</button>
-		</form>
+
+    </form>
+
 		<div class="row">
 			<p class="output">OUTPUT : {{code}}</p>
 		</div>
@@ -103,12 +104,12 @@ code_templates = {
     editor.getSession().setMode("ace/mode/python");
     
     var getCodeSnippet = function (){
+      alert("working");
     var snippet=editor.getValue();
     
     var textar=document.getElementById('textarea-code').value=snippet;
     console.log(textar);
-    console.log($(".language-option option[value='2']").text())
-    console.log($(".language-option").value())
+    
     /*$.getJSON('/compile', {"junk":"junk"}, function(json, textStatus) {
         
         alert("We will show the output on the screen");
@@ -118,7 +119,7 @@ code_templates = {
     });*/
     //alert("Your code has been saved");
 }  ;
-        //getCodeSnippet();
+     
 
    
     

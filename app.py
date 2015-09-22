@@ -20,7 +20,7 @@ def index():
 @app.route('/compile',methods=['GET','POST'])
 def compile():
 	source_code=request.form["edit"]
-
+	
 	logging.debug("This is the source code :: "+source_code)
 	
 	if source_code == '':

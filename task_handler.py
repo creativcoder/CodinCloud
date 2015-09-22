@@ -47,6 +47,7 @@ class CodeTask:
 			self.o.close()
 			subprocess.Popen(['gcc',os.path.abspath(self.file_name+'.c')],stdout=subprocess.PIPE,stderr=subprocess.PIPE)
 			time.sleep(0.5)
-			self.output_string = subprocess.Popen(os.path.abspath('a.out'),stdout=subprocess.PIPE,stderr=subprocess.PIPE)
+			# logging.debug(os.path.abspath('a.out'))
+			self.output_string = subprocess.Popen([os.path.abspath('a.out')],stdout=subprocess.PIPE,stderr=subprocess.PIPE)
 			return self.output_string.stdout.read()
 
