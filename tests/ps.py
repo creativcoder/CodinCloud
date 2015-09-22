@@ -1,13 +1,15 @@
 import subprocess
 import psutil
 import os
-TIMEOUT = 3
+import time
+TIMEOUT = 1
 subp = subprocess.Popen([os.path.abspath('a.out')])
 
 
 p = psutil.Process(subp.pid)
 while 1:
-    if (time.time()-p.create_time)>TIMEOUT:
+    if (time.time()-p.create_time())>TIMEOUT:
         p.kill()
-        raise RuntimeError('timeout')
+        break
+        #raise RuntimeError('timeout')
     time.sleep(5)

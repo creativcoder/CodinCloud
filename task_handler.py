@@ -2,8 +2,10 @@ import subprocess
 import time
 import sys
 import os
+import psutil
 
 import logging
+
 
 logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
 
@@ -48,6 +50,15 @@ class CodeTask:
 			subprocess.Popen(['gcc',os.path.abspath(self.file_name+'.c')],stdout=subprocess.PIPE,stderr=subprocess.PIPE)
 			time.sleep(0.5)
 			# logging.debug(os.path.abspath('a.out'))
+
 			self.output_string = subprocess.Popen([os.path.abspath('a.out')],stdout=subprocess.PIPE,stderr=subprocess.PIPE)
+			# check if process runs for prolonged time
+			TIMEOUT = 5
+			p = psutil.Process(subp.pid)
+			while 1:
+    			if (time.time()-p.create_time())>TIMEOUT:
+        			p.kill()
+        			break
+        			#raise RuntimeError('timeout')
 			return self.output_string.stdout.read()
 
