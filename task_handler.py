@@ -54,11 +54,11 @@ class CodeTask:
 			self.output_string = subprocess.Popen([os.path.abspath('a.out')],stdout=subprocess.PIPE,stderr=subprocess.PIPE)
 			# check if process runs for prolonged time
 			TIMEOUT = 5
-			p = psutil.Process(subp.pid)
+			p = psutil.Process(self.output_string.pid)
 			while 1:
-    			if (time.time()-p.create_time())>TIMEOUT:
-        			p.kill()
-        			break
+    				if(time.time()-p.create_time())>TIMEOUT:
+        				p.kill()
+        				break
         			#raise RuntimeError('timeout')
 			return self.output_string.stdout.read()
 
