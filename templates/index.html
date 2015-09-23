@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {% extends "base.html" %}
 {% block content %}
 
@@ -16,14 +17,72 @@
 
 	<div style="float:right" class="col s9">
     <!-- <button class="waves-effect wave-teal btn" onclick="getCodeSnippet()">Save</button> -->
+=======
+<!DOCTYPE html>
+<html>
+<head>
+	<title>pyjudge</title>
+	<link rel="stylesheet" type="text/css" href="{{url_for('static',filename='css/materialize.min.css')}}">
+	<link rel="stylesheet" type="text/css" href="{{url_for('static',filename='css/style.css')}}">
+	<style type="text/css" media="screen">
+
+    
+</style>
+</head>
+<body>
+
+	<nav>
+    <div class="nav-wrapper">
+      <a href="#" class="brand-logo" id="header-logo">Compiler as a Service Platform</a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li><a href="components.html">Problem Archive</a></li>
+        <li><a href="{{url_for('login')}}">Login</a></li>
+        <li><a href="components.html">Signup</a></li>
+
+        <li><a href="{{url_for('about_page')}}">About</a></li>
+      </ul>
+    </div>
+  </nav>
+<div class="row">
+<div style="float:left" class="col s3">
+<div class="collection">
+        <a href="#!" class="collection-item">Next Palindrome</a>
+        <a href="#!" class="collection-item active">Even Fibonacci</a>
+        <a href="#!" class="collection-item">Combi Tree</a>
+        <a href="#!" class="collection-item">Polish Notation Parser</a>
+      </div>
+</div>
+
+	<div style="float:right" class="col s9">
+    <button class="waves-effect wave-teal btn" onclick="getCodeSnippet()">Save</button>
+>>>>>>> 14f7f628486a4a9fd2e92e95a70f1249f6813f4c
 		<form class="row" action="{{url_for('compile')}}" method="post">
 		<div class="row">
 			<input type="text" value="" required name="filename_field" placeholder="Enter Filename (without extension)"/>
 			</div>
+<<<<<<< HEAD
     
 			<div id="code-box" class="input-field">
 			
 				<div name="editor" id="editor"></div>
+=======
+      <label>Select Language</label>
+    <select class="language-option">
+      <option value="" disabled selected>Languages</option>
+      <option value="1">C++</option>
+      <option value="2">Python</option>
+      <option value="3">Java</option>
+      <option value="3">Rust</option>
+      <option value="3">Ruby</option>
+      <option value="3">Nodejs</option>
+    </select>
+			<div id="code-box" class="input-field">
+			
+			<!-- <label>Type your code here</label> -->
+			
+				<div name="editor" id="editor">#Type your code here
+				</div>
+>>>>>>> 14f7f628486a4a9fd2e92e95a70f1249f6813f4c
 				
 				<br/>
 				<br/>
@@ -31,6 +90,7 @@
 			<textarea id="textarea-code" hidden type="text" name="edit"></textarea>
 			<br/>
 			
+<<<<<<< HEAD
       <div class="input-field col s12">
           <textarea name="std-input" id="textarea1" class="materialize-textarea"></textarea>
           <label for="textarea1">Stdin (Enter input here)</label>
@@ -38,13 +98,23 @@
 				<button style="margin-top:10px" class="waves-effect wave-teal btn" type="submit" onclick="getCodeSnippet()">Compile</button>
 
 <!-- <form class="col s12">
+=======
+
+				<button style="margin-top:10px" class="waves-effect wave-teal btn" type="submit" onclick="getCodeSnippet()">Compile</button>
+
+<form class="col s12">
+>>>>>>> 14f7f628486a4a9fd2e92e95a70f1249f6813f4c
       <div class="row">
         <div class="input-field col s12">
           <textarea id="textarea1" class="materialize-textarea"></textarea>
           <label for="textarea1">Stdin (Enter input here)</label>
         </div>
       </div>
+<<<<<<< HEAD
     </form> -->
+=======
+    </form>
+>>>>>>> 14f7f628486a4a9fd2e92e95a70f1249f6813f4c
 
 
 <br> <br> 
@@ -57,11 +127,36 @@
 
 	</div>
 </div>
+<<<<<<< HEAD
 <script>
 var editor=null;
 var getCodeSnippet = function (){
       alert("working");
     var snippet=editor.getValue();
+=======
+
+	<script type="text/javascript" src="{{url_for('static',filename='js/jquery-2.1.1.min.js')}}"></script>
+	<script type="text/javascript" src="{{url_for('static',filename='js/materialize.js')}}"></script>
+	
+<script src="{{url_for('static',filename="ace-builds/src-noconflict/ace.js")}}" type="text/javascript" charset="utf-8"></script>
+
+<script>
+
+code_templates = {
+  1:"#include<stdio.h>\nint main()\n{\nprintf(\"Hello World\");\n}",
+  2:"print(\"Hello\")",
+  3:""
+}
+
+    var editor = ace.edit("editor");
+    editor.setTheme("ace/theme/monokai");
+    editor.getSession().setMode("ace/mode/python");
+    
+    var getCodeSnippet = function (){
+      alert("working");
+    var snippet=editor.getValue();
+    
+>>>>>>> 14f7f628486a4a9fd2e92e95a70f1249f6813f4c
     var textar=document.getElementById('textarea-code').value=snippet;
     console.log(textar);
     
@@ -73,6 +168,7 @@ var getCodeSnippet = function (){
 
     });*/
     //alert("Your code has been saved");
+<<<<<<< HEAD
 } ;
 
     window.onload = function init(){
@@ -83,3 +179,15 @@ var getCodeSnippet = function (){
 }
 </script>
 {% endblock %}
+=======
+}  ;
+     
+
+   
+    
+
+</script>
+
+</body>
+</html>
+>>>>>>> 14f7f628486a4a9fd2e92e95a70f1249f6813f4c

@@ -1,6 +1,11 @@
 #header-logo {
+<<<<<<< HEAD
 	font-size: 20px;
 	padding-left: 10px;
+=======
+	font-size: 10px;
+	padding: 0px;
+>>>>>>> 14f7f628486a4a9fd2e92e95a70f1249f6813f4c
 	margin: 0px;
 }
 code {

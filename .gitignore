@@ -1,0 +1,4 @@
+*.pyc
+/static/ace-builds/*
+*.out
+*.c
