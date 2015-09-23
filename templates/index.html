@@ -62,17 +62,20 @@
 			<textarea id="textarea-code" hidden type="text" name="edit"></textarea>
 			<br/>
 			
-
+      <div class="input-field col s12">
+          <textarea name="std-input" id="textarea1" class="materialize-textarea"></textarea>
+          <label for="textarea1">Stdin (Enter input here)</label>
+        </div>
 				<button style="margin-top:10px" class="waves-effect wave-teal btn" type="submit" onclick="getCodeSnippet()">Compile</button>
 
-<form class="col s12">
+<!-- <form class="col s12">
       <div class="row">
         <div class="input-field col s12">
           <textarea id="textarea1" class="materialize-textarea"></textarea>
           <label for="textarea1">Stdin (Enter input here)</label>
         </div>
       </div>
-    </form>
+    </form> -->
 
 
 <br> <br> 
@@ -101,7 +104,7 @@ code_templates = {
 
     var editor = ace.edit("editor");
     editor.setTheme("ace/theme/monokai");
-    editor.getSession().setMode("ace/mode/python");
+    editor.getSession().setMode("ace/mode/java");
     
     var getCodeSnippet = function (){
       alert("working");

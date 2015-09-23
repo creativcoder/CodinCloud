@@ -28,7 +28,7 @@ def compile():
 	
 	new_task=CodeTask(1)
 	output_result = new_task.compile(request.form['filename_field'],source_code)
-	
+	logging.debug(request.form['std-input'])
 	logging.debug('Code ran successfully with output: '+output_result)
 	logging.debug('Filename field is  :'+request.form['filename_field'])
 	
