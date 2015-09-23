@@ -1,36 +1,17 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>pyjudge</title>
-	<link rel="stylesheet" type="text/css" href="{{url_for('static',filename='css/materialize.min.css')}}">
-	<link rel="stylesheet" type="text/css" href="{{url_for('static',filename='css/style.css')}}">
-	<style type="text/css" media="screen">
+{% extends "base.html" %}
+{% block content %}
 
-    
-</style>
-</head>
-<body>
-
-	<nav>
-    <div class="nav-wrapper">
-      <a href="#" class="brand-logo" id="header-logo">Compiler as a Service Platform</a>
-      <ul id="nav-mobile" class="right hide-on-med-and-down">
-        <li><a href="components.html">Problem Archive</a></li>
-        <li><a href="{{url_for('login')}}">Login</a></li>
-        <li><a href="components.html">Signup</a></li>
-
-        <li><a href="{{url_for('about_page')}}">About</a></li>
-      </ul>
-    </div>
-  </nav>
 <div class="row">
 <div style="float:left" class="col s3">
-<div class="collection">
-        <a href="#!" class="collection-item">Next Palindrome</a>
-        <a href="#!" class="collection-item active">Even Fibonacci</a>
-        <a href="#!" class="collection-item">Combi Tree</a>
-        <a href="#!" class="collection-item">Polish Notation Parser</a>
-      </div>
+
+ <div class="collection">
+  <label>Select Language</label>
+        <a href="#!" class="collection-item active">C</a>
+        <a href="#!" class="collection-item ">C++</a>
+        <a href="#!" class="collection-item">Python</a>
+        <a href="#!" class="collection-item">NodeJS</a>
+        <a href="#!" class="collection-item">Rust</a>
+      </div> 
 </div>
 
 	<div style="float:right" class="col s9">
@@ -39,16 +20,7 @@
 		<div class="row">
 			<input type="text" value="" required name="filename_field" placeholder="Enter Filename (without extension)"/>
 			</div>
-      <label>Select Language</label>
-    <select class="language-option">
-      <option value="" disabled selected>Languages</option>
-      <option value="1">C++</option>
-      <option value="2">Python</option>
-      <option value="3">Java</option>
-      <option value="3">Rust</option>
-      <option value="3">Ruby</option>
-      <option value="3">Nodejs</option>
-    </select>
+    
 			<div id="code-box" class="input-field">
 			
 			<!-- <label>Type your code here</label> -->
@@ -88,28 +60,11 @@
 
 	</div>
 </div>
-
-	<script type="text/javascript" src="{{url_for('static',filename='js/jquery-2.1.1.min.js')}}"></script>
-	<script type="text/javascript" src="{{url_for('static',filename='js/materialize.js')}}"></script>
-	
-<script src="{{url_for('static',filename="ace-builds/src-noconflict/ace.js")}}" type="text/javascript" charset="utf-8"></script>
-
 <script>
-
-code_templates = {
-  1:"#include<stdio.h>\nint main()\n{\nprintf(\"Hello World\");\n}",
-  2:"print(\"Hello\")",
-  3:""
-}
-
-    var editor = ace.edit("editor");
-    editor.setTheme("ace/theme/monokai");
-    editor.getSession().setMode("ace/mode/java");
-    
-    var getCodeSnippet = function (){
+var editor=null;
+var getCodeSnippet = function (){
       alert("working");
     var snippet=editor.getValue();
-    
     var textar=document.getElementById('textarea-code').value=snippet;
     console.log(textar);
     
@@ -121,13 +76,12 @@ code_templates = {
 
     });*/
     //alert("Your code has been saved");
-}  ;
-     
+} ;
 
-   
-    
-
+    window.onload = function init(){
+    editor = ace.edit("editor");
+    editor.setTheme("ace/theme/monokai");
+    editor.getSession().setMode("ace/mode/java");  
+}
 </script>
-
-</body>
-</html>
+{% endblock %}
