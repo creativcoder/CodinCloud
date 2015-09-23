@@ -37,10 +37,9 @@ def compile():
 
 @app.route('/test')
 def test():
-	subprocess.Popen(['gcc',os.path.abspath('temp.c')])
-	output = subprocess.Popen([os.path.abspath('a.out')],stdout=subprocess.PIPE,stderr=subprocess.PIPE)
+	
 	#logging.debug(output.stdout.read())
-	return render_template('error.html',output=output.stdout.read())
+	return render_template('output.html',output="jhg")
 
 @app.route('/about_page')
 def about_page():
