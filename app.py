@@ -20,24 +20,24 @@ def index():
 @app.route('/compile',methods=['GET','POST'])
 def compile():
 	source_code=request.form["edit"]
-<<<<<<< HEAD
+
 	std_input = request.form["std-input"]
-=======
+
 	
->>>>>>> 14f7f628486a4a9fd2e92e95a70f1249f6813f4c
+
 	logging.debug("This is the source code :: "+source_code)
 	
 	if source_code == '':
 		return render_template('error.html')
 	
 	new_task=CodeTask(1)
-<<<<<<< HEAD
+
 	output_result = new_task.compile(request.form['filename_field'],source_code,std_input)
 	logging.debug(request.form['std-input'])
-=======
+
 	output_result = new_task.compile(request.form['filename_field'],source_code)
 	
->>>>>>> 14f7f628486a4a9fd2e92e95a70f1249f6813f4c
+
 	logging.debug('Code ran successfully with output: '+output_result)
 	logging.debug('Filename field is  :'+request.form['filename_field'])
 	
@@ -46,16 +46,16 @@ def compile():
 
 @app.route('/test')
 def test():
-<<<<<<< HEAD
+
 	
 	#logging.debug(output.stdout.read())
 	return render_template('output.html',output="jhg")
-=======
+
 	subprocess.Popen(['gcc',os.path.abspath('temp.c')])
 	output = subprocess.Popen([os.path.abspath('a.out')],stdout=subprocess.PIPE,stderr=subprocess.PIPE)
 	#logging.debug(output.stdout.read())
 	return render_template('error.html',output=output.stdout.read())
->>>>>>> 14f7f628486a4a9fd2e92e95a70f1249f6813f4c
+
 
 @app.route('/about_page')
 def about_page():
