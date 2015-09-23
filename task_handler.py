@@ -14,7 +14,10 @@ class CodeTask:
 	def __init__(self,lang_name):
 		self.lang_id=lang_name
 		if self.lang_id == 1:
-			pass
+			if os.path.exists(os.path.abspath('a.out')):
+				subprocess.Popen(['rm',os.path.abspath('a.out')])
+			else:
+				pass
 			# self.f=open('temp.c','w')
 			# self.f.write('#include <stdio.h>\nint main(){printf("");}')
 			# self.f.close()
