@@ -20,14 +20,14 @@ def index():
 @app.route('/compile',methods=['GET','POST'])
 def compile():
 	source_code=request.form["edit"]
-	
+	std_input = request.form["std-input"]
 	logging.debug("This is the source code :: "+source_code)
 	
 	if source_code == '':
 		return render_template('error.html')
 	
 	new_task=CodeTask(1)
-	output_result = new_task.compile(request.form['filename_field'],source_code)
+	output_result = new_task.compile(request.form['filename_field'],source_code,std_input)
 	logging.debug(request.form['std-input'])
 	logging.debug('Code ran successfully with output: '+output_result)
 	logging.debug('Filename field is  :'+request.form['filename_field'])
