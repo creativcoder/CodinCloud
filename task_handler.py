@@ -53,7 +53,7 @@ class CodeTask:
 			logging.debug(os.path.abspath('a.out'))
 			self.output_string = subprocess.Popen([os.path.abspath('a.out')],stdout=subprocess.PIPE,stderr=subprocess.PIPE)
 			if self.std_input:
-				return self.output_string.communicate(std_input)[0]
+				return self.output_string.communicate(str(std_input))[0]
 
 			# check if process runs for prolonged time
 			TIMEOUT = 1
