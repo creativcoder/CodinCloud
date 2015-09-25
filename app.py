@@ -89,7 +89,7 @@ def compile():
 	logging.debug(request.form['std-input'])
 	logging.debug('Code ran successfully with output: '+output_result)
 	logging.debug('Filename field is  :'+request.form['filename_field'])
-	time.sleep(0.5)
+	time.sleep(0.8)
 	return render_template('output.html',output=output_result.split('\n'))
 	
 
