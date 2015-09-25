@@ -6,7 +6,7 @@
 
  <div class="collection">
   <label>Select Language</label>
-        <a href="#!" class="collection-item active">C</a>
+        <a href="#!" class="collection-item active">C (Currently Supported)</a>
         <a href="#!" class="collection-item ">C++</a>
         <a href="#!" class="collection-item">Python</a>
         <a href="#!" class="collection-item">NodeJS</a>
@@ -23,10 +23,7 @@
     
 			<div id="code-box" class="input-field">
 			
-			<!-- <label>Type your code here</label> -->
-			
-				<div name="editor" id="editor">#Type your code here
-				</div>
+				<div name="editor" id="editor"></div>
 				
 				<br/>
 				<br/>
@@ -81,7 +78,8 @@ var getCodeSnippet = function (){
     window.onload = function init(){
     editor = ace.edit("editor");
     editor.setTheme("ace/theme/monokai");
-    editor.getSession().setMode("ace/mode/java");  
+    editor.getSession().setMode("ace/mode/java");
+    editor.focus();
 }
 </script>
 {% endblock %}

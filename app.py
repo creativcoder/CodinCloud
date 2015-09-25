@@ -1,15 +1,73 @@
 import os
+import time
 import config
 import logging
 from task_handler import CodeTask
 import subprocess
 
+# import re
+
+# from jinja2 import evalcontextfilter, Markup, escape
+
+# _paragraph_re = re.compile(r'(?:\r\n|\r|\n){2,}')
+
+# app = Flask(__name__)
+
+# @app.template_filter()
+# @evalcontextfilter
+# def nl2br(eval_ctx, value):
+#     result = u'\n\n'.join(u'<p>%s</p>' % p.replace('\n', '<br>\n') \
+#         for p in _paragraph_re.split(escape(value)))
+#     if eval_ctx.autoescape:
+#         result = Markup(result)
+#     return result
+
+
 
 from flask import Flask,request,render_template,url_for,jsonify
+from flask_mail import Mail
+from flask_sqlalchemy import SQLAlchemy
+from flask_user import login_required, UserManager, UserMixin, SQLAlchemyAdapter
+
+class ConfigClass(object):
+	# Flask Settings
+	SECRET_KEY = os.getenv('FLASK_DEV_KEY','SAMPLE_INSECURE_KEY')
+	SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URI','sqlite:///basic.sqlite')
+	# Flask-Mail Settings
+	MAIL_USERNAME = os.getenv('MAIL_USERNAME','rsconceptx@gmail.com')
+	MAIL_PASSWORD = os.getenv('MAIL_PASSWORD','Devilzz9688$')
+	MAIL_DEFAULT_SENDER = os.getenv('MAIL_DEFAULT_SENDER','rsconceptx@gmail.com')
+	MAIL_SERVER = os.getenv('MAIL_SERVER','smtp.gmail.com')
+	MAIL_PORT = int(os.getenv('MAIL_PORT','465'))
+	MAIL_USE_SSL = int(os.getenv('MAIL_USE_SSL',True))
+
+	# Flask-User settings
+	USER_APP_NAME = "AppName"
 
 logging.basicConfig(level=logging.DEBUG)
 
 app=Flask(__name__)
+app.config.from_object(__name__+'.ConfigClass')
+
+db = SQLAlchemy(app)
+mail = Mail(app)
+
+class User(db.Model,UserMixin):
+	id = db.Column(db.Integer,primary_key=True)
+
+	# User Authentication Information
+	username = db.Column(db.String(50), nullable=False, unique=True)
+	password = db.Column(db.String(255),nullable=False,server_default='')
+	reset_password_token = db.Column(db.String(100),nullable=False,server_default='')
+
+	#User email information
+	email = db.Column(db.String(255),nullable=False,unique=True)
+	confirmed_at = db.Column(db.DateTime())
+
+	# User Information
+	active = db.Column('is_active',db.Boolean(),nullable=False,server_default='0')
+
+db.create_all()
 
 app.secret = config.KEY
 
@@ -31,8 +89,8 @@ def compile():
 	logging.debug(request.form['std-input'])
 	logging.debug('Code ran successfully with output: '+output_result)
 	logging.debug('Filename field is  :'+request.form['filename_field'])
-	
-	return render_template('output.html',output=output_result)
+	time.sleep(0.5)
+	return render_template('output.html',output=output_result.split('\n'))
 	
 
 @app.route('/test')
@@ -41,11 +99,14 @@ def test():
 	#logging.debug(output.stdout.read())
 	return render_template('output.html',output="jhg")
 
-@app.route('/about_page')
-def about_page():
-	return "PyJudge is an Online compiler made by the Flask MicroFramework"
+@app.route('/about')
+def about():
+	return render_template('about.html')
 
-#--------NEED TO WORK ON--------------------------------------------------
+@app.route('/signup')
+def signup():
+	return render_template('signup.html')
+
 @app.route('/login')
 def login():
 	return render_template('login.html')
