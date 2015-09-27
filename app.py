@@ -4,6 +4,24 @@ import logging
 from task_handler import CodeTask
 import subprocess
 
+# import re
+
+# from jinja2 import evalcontextfilter, Markup, escape
+
+# _paragraph_re = re.compile(r'(?:\r\n|\r|\n){2,}')
+
+# app = Flask(__name__)
+
+# @app.template_filter()
+# @evalcontextfilter
+# def nl2br(eval_ctx, value):
+#     result = u'\n\n'.join(u'<p>%s</p>' % p.replace('\n', '<br>\n') \
+#         for p in _paragraph_re.split(escape(value)))
+#     if eval_ctx.autoescape:
+#         result = Markup(result)
+#     return result
+
+
 
 from flask import Flask,request,render_template,url_for,jsonify
 
@@ -32,7 +50,7 @@ def compile():
 	logging.debug('Code ran successfully with output: '+output_result)
 	logging.debug('Filename field is  :'+request.form['filename_field'])
 	
-	return render_template('output.html',output=output_result)
+	return render_template('output.html',output=output_result.split('\n'))
 	
 
 @app.route('/test')
@@ -41,11 +59,14 @@ def test():
 	#logging.debug(output.stdout.read())
 	return render_template('output.html',output="jhg")
 
-@app.route('/about_page')
-def about_page():
-	return "PyJudge is an Online compiler made by the Flask MicroFramework"
+@app.route('/about')
+def about():
+	return render_template('about.html')
 
-#--------NEED TO WORK ON--------------------------------------------------
+@app.route('/signup')
+def signup():
+	return render_template('signup.html')
+
 @app.route('/login')
 def login():
 	return render_template('login.html')

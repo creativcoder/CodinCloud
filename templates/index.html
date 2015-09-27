@@ -6,7 +6,7 @@
 
  <div class="collection">
   <label>Select Language</label>
-        <a href="#!" class="collection-item active">C</a>
+        <a href="#!" class="collection-item active">C (Currently Supported)</a>
         <a href="#!" class="collection-item ">C++</a>
         <a href="#!" class="collection-item">Python</a>
         <a href="#!" class="collection-item">NodeJS</a>
@@ -23,10 +23,7 @@
     
 			<div id="code-box" class="input-field">
 			
-			<!-- <label>Type your code here</label> -->
-			
-				<div name="editor" id="editor">#Type your code here
-				</div>
+				<div name="editor" id="editor"></div>
 				
 				<br/>
 				<br/>
@@ -63,25 +60,16 @@
 <script>
 var editor=null;
 var getCodeSnippet = function (){
-      alert("working");
+      
     var snippet=editor.getValue();
     var textar=document.getElementById('textarea-code').value=snippet;
-    console.log(textar);
-    
-    /*$.getJSON('/compile', {"junk":"junk"}, function(json, textStatus) {
-        
-        alert("We will show the output on the screen");
-        $('.output').text(json.result);
-
-
-    });*/
-    //alert("Your code has been saved");
 } ;
 
     window.onload = function init(){
     editor = ace.edit("editor");
     editor.setTheme("ace/theme/monokai");
-    editor.getSession().setMode("ace/mode/java");  
+    editor.getSession().setMode("ace/mode/java");
+    editor.focus();
 }
 </script>
 {% endblock %}

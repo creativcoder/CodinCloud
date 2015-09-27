@@ -12,8 +12,11 @@ The older version of this app is hosted @[pyjudge](https://flaskcompiler.herokua
 
 As a dependency you need :
 
-@[Ace Editor](http://github.com/ajaxorg/ace/) - for syntax highlighting
+@[Ace Editor](http://github.com/ajaxorg/ace/) - Editor used in PyJudge
 
-Extract the repo to the static folder and then issue the command
+Extract the (Ace Editor) repo to the static folder and then issue the command
 
 `python app.py <port>`
+
+TODO
+--Add Support for multiple languages
