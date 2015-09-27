@@ -6,13 +6,14 @@
 	<title>Compiler as a Service Platform</title>
 	<link rel="stylesheet" type="text/css" href="{{url_for('static',filename='css/materialize.min.css')}}">
 	<link rel="stylesheet" type="text/css" href="{{url_for('static',filename='css/style.css')}}">
+<script type="text/javascript" src="{{url_for('static',filename='js/jquery-2.1.1.min.js')}}"></script>
 </head>
 <body>
 <nav>
     <div class="nav-wrapper grey darken-3">
-      <a href="#" class="brand-logo" id="header-logo">Compiler as a Service Platform</a>
+      <a href="{{url_for('index')}}" class="brand-logo" id="header-logo">Compiler as a Service Platform</a>
       <ul id="nav-mobile" class="right hide-on-med-and-down">
-        <li><a href="components.html">Problem Archive</a></li>
+        <li><a href="#">Problem Archive</a></li>
         <li><a href="{{url_for('login')}}">Login</a></li>
         <li><a href="{{url_for('signup')}}">Signup</a></li>
 
@@ -24,7 +25,7 @@
 {% block content %}
 {% endblock %}
 
-<script type="text/javascript" src="{{url_for('static',filename='js/jquery-2.1.1.min.js')}}"></script>
+
 	<script type="text/javascript" src="{{url_for('static',filename='js/materialize.js')}}"></script>
 	<script src="{{url_for('static',filename="ace-builds/src-noconflict/ace.js")}}" type="text/javascript" charset="utf-8"></script>
 </body>

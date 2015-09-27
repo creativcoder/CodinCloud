@@ -1,6 +1,7 @@
 import os
 import config
 import logging
+import time
 from task_handler import CodeTask
 import subprocess
 
@@ -35,29 +36,37 @@ app.secret = config.KEY
 def index():
 	return render_template('index.html')
 
-@app.route('/compile',methods=['GET','POST'])
-def compile():
-	source_code=request.form["edit"]
-	std_input = request.form["std-input"]
-	logging.debug("This is the source code :: "+source_code)
+# @app.route('/compile',methods=['GET','POST'])
+# def compile():
+# 	source_code=request.form["edit"]
+# 	std_input = request.form["std-input"]
+# 	logging.debug("This is the source code :: "+source_code)
 	
-	if source_code == '':
-		return render_template('error.html')
+# 	if source_code == '':
+# 		return render_template('error.html')
 	
-	new_task=CodeTask(1)
-	output_result = new_task.compile(request.form['filename_field'],source_code,std_input)
-	logging.debug(request.form['std-input'])
-	logging.debug('Code ran successfully with output: '+output_result)
-	logging.debug('Filename field is  :'+request.form['filename_field'])
+# 	new_task=CodeTask(1)
+# 	output_result = new_task.compile(request.form['filename_field'],source_code,std_input)
+# 	logging.debug(request.form['std-input'])
+# 	logging.debug('Code ran successfully with output: '+output_result)
+# 	logging.debug('Filename field is  :'+request.form['filename_field'])
 	
-	return render_template('output.html',output=output_result.split('\n'))
+# 	return render_template('output.html',output=output_result.split('\n'))
 	
 
-@app.route('/test')
+
+@app.route('/compile')
 def test():
-	
+	filename = request.args.get('filename','',type=str)
+	source_code = request.args.get('source_code','',type=str)
+	stdin = request.args.get('stdin','',type=str)
+	new_task=CodeTask(1)
+	output_result = new_task.compile(filename,source_code,stdin)
+	logging.debug(output_result)
+	time.sleep(0.5)
+	logging.debug(output_result.replace('\n','<br>'))
+	return jsonify(result=output_result.replace('\n','<br>'))
 	#logging.debug(output.stdout.read())
-	return render_template('output.html',output="jhg")
 
 @app.route('/about')
 def about():

@@ -2,12 +2,11 @@
 {% block content %}
 
 <div class="row">
-<div style="float:left" class="col s3">
-
+<div class="left-align col s3">
  <div class="collection">
   <label>Select Language</label>
         <a href="#!" class="collection-item active">C (Currently Supported)</a>
-        <a href="#!" class="collection-item ">C++</a>
+        <a href="#!" class="collection-item">C++</a>
         <a href="#!" class="collection-item">Python</a>
         <a href="#!" class="collection-item">NodeJS</a>
         <a href="#!" class="collection-item">Rust</a>
@@ -16,7 +15,7 @@
 
 	<div style="float:right" class="col s9">
     <!-- <button class="waves-effect wave-teal btn" onclick="getCodeSnippet()">Save</button> -->
-		<form class="row" action="{{url_for('compile')}}" method="post">
+		<form id="code_form" class="row" action="" method="post">
 		<div class="row">
 			<input type="text" value="" required name="filename_field" placeholder="Enter Filename (without extension)"/>
 			</div>
@@ -32,27 +31,24 @@
 			<br/>
 			
       <div class="input-field col s12">
-          <textarea name="std-input" id="textarea1" class="materialize-textarea"></textarea>
+          <textarea name="std-input" id="stdin" class="materialize-textarea"></textarea>
           <label for="textarea1">Stdin (Enter input here)</label>
         </div>
 				<button style="margin-top:10px" class="waves-effect wave-teal btn" type="submit" onclick="getCodeSnippet()">Compile</button>
-
-<!-- <form class="col s12">
-      <div class="row">
-        <div class="input-field col s12">
-          <textarea id="textarea1" class="materialize-textarea"></textarea>
-          <label for="textarea1">Stdin (Enter input here)</label>
-        </div>
-      </div>
-    </form> -->
-
 
 <br> <br> 
 
     </form>
 
 		<div class="row">
-			<p class="output">OUTPUT : {{code}}</p>
+			<p id="output" class="output">
+          {%- for line in data -%}
+  {{line}} 
+  {%- if not loop.last -%}
+            <br />
+        {%- endif -%}
+    {%- endfor -%}
+      </p>
 		</div>
 
 	</div>
@@ -60,10 +56,21 @@
 <script>
 var editor=null;
 var getCodeSnippet = function (){
-      
+    
     var snippet=editor.getValue();
     var textar=document.getElementById('textarea-code').value=snippet;
+    $.getJSON('/compile',{
+      filename:$('input[name="filename_field"]').val(),
+      source_code:textar,
+      stdin: $('#stdin').val()
+    },function(data){
+        $('#output').html(data.result);
+
+    });
+    return false;
 } ;
+
+$('#code_form').submit(getCodeSnippet);
 
     window.onload = function init(){
     editor = ace.edit("editor");
