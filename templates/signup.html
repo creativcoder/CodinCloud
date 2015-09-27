@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container">
+	<br>
+	<h3>Sign Up to Codey</h3>
+	<br>
+	 <div class="row">
+    <form class="col s9">
+      <div class="row">
+        <div class="input-field col s2">
+          <input placeholder="Placeholder" id="first_name" type="text" class="validate">
+          <label for="first_name">Username</label>
+        </div>
+        <div class="input-field col s6">
+          <input id="last_name" type="text" class="validate">
+          <label for="last_name">Github username</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <input id="password" type="password" class="validate">
+          <label for="password">Password</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <input id="email" type="email" class="validate">
+          <label for="email">Email</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <input id="signup-btn" type="submit" class="validate btn" value="Sign Up">
+         
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+{% endblock %}

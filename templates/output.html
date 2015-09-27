@@ -1,0 +1,26 @@
+{%extends "base.html" %}
+{% block content %}
+
+<div class="container">
+<div class="row">
+<div style="float:left" class="col s3">
+	<div class="stdout">
+	<h4>Stdout :</h4>
+	{%- for line in output -%}
+	{{line}}
+	{%- if not loop.last -%}
+            <br />
+        {%- endif -%}
+    {%- endfor -%}
+
+<!-- <p>{{output}}</p> -->
+</div>
+<div class="stderr">
+	<h4>Stderr :</h4>
+<p>Standard Error will appear here</p>
+</div>
+</div>
+</div>
+</div>
+
+{% endblock %}
