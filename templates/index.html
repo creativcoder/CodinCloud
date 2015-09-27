@@ -60,19 +60,9 @@
 <script>
 var editor=null;
 var getCodeSnippet = function (){
-      alert("working");
+      
     var snippet=editor.getValue();
     var textar=document.getElementById('textarea-code').value=snippet;
-    console.log(textar);
-    
-    /*$.getJSON('/compile', {"junk":"junk"}, function(json, textStatus) {
-        
-        alert("We will show the output on the screen");
-        $('.output').text(json.result);
-
-
-    });*/
-    //alert("Your code has been saved");
 } ;
 
     window.onload = function init(){
