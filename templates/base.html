@@ -11,9 +11,13 @@
 <body>
 <nav>
     <div class="nav-wrapper grey darken-3">
-      <a href="{{url_for('index')}}" class="brand-logo" id="header-logo">Compiler as a Service Platform</a>
+
+      <div class="logo-title">
+      <a href="{{url_for('index')}}" class="brand-logo" id="header-logo"><span><img style="width:62px;float:left" src="{{url_for('static',filename='logo.png')}}"> </span>&nbsp;Compiler as a Service Platform</a>
+      </div>
+
       <ul id="nav-mobile" class="right hide-on-med-and-down">
-        <li><a href="#">Problem Archive</a></li>
+        <!-- <li><a href="#">Problem Archive</a></li> -->
         <li><a href="{{url_for('login')}}">Login</a></li>
         <li><a href="{{url_for('signup')}}">Signup</a></li>
 
@@ -21,10 +25,30 @@
       </ul>
     </div>
   </nav>
+  <br>
 
 {% block content %}
 {% endblock %}
 
+
+<footer class="page-footer grey darken-3">
+          <div class="container">
+            <div class="row">
+              <div class="col l6 s12">
+                <h5 class="white-text">Compiler as a Service Platform</h5>
+                <p class="grey-text text-lighten-4">Made using <a href="https://flask.pocoo.org/
+">Flask</a> and some <a href="https://materializecss.com/">Materials</a> :D</p>
+              </div>
+              
+            </div>
+          </div>
+          <div class="footer-copyright">
+            <div class="container">
+            <a href="https://github.com/creativcoder">@creativcoder</a>
+            <a class="grey-text text-lighten-4 right" href="https://github.com/creativcoder/pyjudge">Source on Github</a>
+            </div>
+          </div>
+        </footer>
 
 	<script type="text/javascript" src="{{url_for('static',filename='js/materialize.js')}}"></script>
 	<script src="{{url_for('static',filename="ace-builds/src-noconflict/ace.js")}}" type="text/javascript" charset="utf-8"></script>
