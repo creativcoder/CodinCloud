@@ -60,11 +60,16 @@ def test():
 	filename = request.args.get('filename','',type=str)
 	source_code = request.args.get('source_code','',type=str)
 	stdin = request.args.get('stdin','',type=str)
+	logging.debug('on app.py = '+str(len(stdin)))
+	logging.debug('on app.py = '+stdin)
+	
 	new_task=CodeTask(1)
-	output_result = new_task.compile(filename,source_code,stdin)
+	if(len(stdin)==0):
+		output_result = new_task.compile(filename,source_code)
+	else:
+		output_result = new_task.compile(filename,source_code,stdin)
 	logging.debug(output_result)
 	time.sleep(0.5)
-	logging.debug(output_result.replace('\n','<br>'))
 	return jsonify(result=output_result.replace('\n','<br>'))
 	#logging.debug(output.stdout.read())
 
