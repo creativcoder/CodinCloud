@@ -14,9 +14,7 @@ def infinite(process,inp):
 	INFINITE = False
 	subp_obj = subprocess.Popen([os.path.abspath('a.out')],stdout=subprocess.PIPE,stderr=subprocess.PIPE,stdin=subprocess.PIPE)
 	p = psutil.Process(subp_obj.pid)
-	for i in range(len(inp)):
-		subp_obj.stdin.write(str(i))
-	print("communicate ran")
+	# logging.debug("communicate ran")
 	# while 1:
 	# 	if (time.time()-p.create_time())>TIMEOUT:
 	# 		p.kill()
@@ -24,7 +22,6 @@ def infinite(process,inp):
 	# 		raise RuntimeError('timeout')
 	return INFINITE
 	
-
 
 logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
 
@@ -48,7 +45,7 @@ class CodeTask:
 			self.f.close()
 			subprocess.Popen(['python',os.path.dirname(os.path.abspath(__file__))+'/temp.py'])
 
-	def compile(self,file_name,source_code,std_input=str(0)):
+	def compile(self,file_name,source_code,std_input=''):
 		if self.lang_id == 2:
 			self.source_code=source_code
 			self.file_name=file_name
@@ -87,29 +84,14 @@ class CodeTask:
 				elif len(self.std_input) != 0:
 					logging.debug("std input is present proceeding ahead")
 					logging.debug(len(self.std_input))
-					for i in range(len(self.std_input)):
-						print("running")
-						self.output_string.stdin.write(str(i))
-						#logging.debug(self.output_string.stdout.readline())
-						# self.final_output += self.output_string.stdout.read()
-					print("Writing EOF")
-					
-					print("Ended EOF")
-				self.final_output = self.output_string.communicate()[0]
-				print("read output also")
-				
-				# while 1:
-				# 	if(time.time()-p.create_time()>TIMEOUT):
-				# 		p.kill()
-				# 		break
-			# check if process runs for prolonged time
-			
-			#p = psutil.Process(self.output_string.pid)
-			#while 1:
-    		#		if(time.time()-p.create_time())>TIMEOUT:
-        	#			p.kill()
-        	#			break
-        			#raise RuntimeError('timeout')
-
+					# for i in range(len(self.std_input)):
+					# 	print("running")
+					# 	self.output_string.stdin.write(str(i))
+					# 	#logging.debug(self.output_string.stdout.readline())
+					# 	# self.final_output += self.output_string.stdout.read()
+					# logging.debug("Writing EOF")
+					# logging.debug("Ended EOF")
+				self.final_output = self.output_string.communicate(std_input)[0]
+				logging.debug("Output Stream Read Complete")
 			return self.final_output
 

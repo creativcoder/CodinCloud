@@ -14,7 +14,8 @@ subp = subprocess.Popen([os.path.abspath('a.out')],stdin=PIPE,stdout=PIPE,stderr
 for i in inputs:
 	subp.stdin.write(i)
 subp.stdin.write('\n')
-print(subp.stdout.read())
+print 'stuck at communicate'
+print(subp.communicate())
 print("communicate ran")
 p = psutil.Process(subp.pid)
 while 1:
