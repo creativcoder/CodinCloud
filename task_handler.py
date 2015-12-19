@@ -53,8 +53,7 @@ class CodeTask:
 			self.o.write(self.source_code)
 			self.o.close()
 			self.output_string = subprocess.Popen(['python',os.path.dirname(os.path.abspath(__file__))+'/{}.py'.format(self.file_name)],stdout=subprocess.PIPE,stderr=subprocess.PIPE)
-			time.sleep(0.4)	
-			#self.output_string = subprocess.Popen([os.path.dirname(os.path.abspath(__file__))+'/main'],stdout=subprocess.PIPE,stderr=subprocess.PIPE)
+			time.sleep(0.4)
 			print self.output_string.stdout.read()
 			return self.output_string.stdout.read()
 
