@@ -3,18 +3,23 @@
 
 <div class="row">
 <div class="left-align col s3">
- <div class="collection">
   <h6>&nbsp;&nbsp;Select Language</h6>
-        <a href="#!" class="collection-item active">C (Currently Supported)</a>
-        <a href="#!" class="collection-item">C++</a>
-        <a href="#!" class="collection-item">Python</a>
-        <a href="#!" class="collection-item">NodeJS</a>
-        <a href="#!" class="collection-item">Rust</a>
-      </div> 
+    <div class="input-field">
+    <select onclick="changeLanguage()" class="languages browser-default">
+      <option value="" selected>Choose Language</option>
+      <option value="0">C</option>
+      <option value="1">C++</option>
+      <option value="2">NodeJS</option>
+      <option value="3">Rust</option>
+      <option value="4">Java</option>
+      <label>Select Language</label>
+    </select>
+      </div>
 </div>
 
 	<div style="float:right" class="col s9">
-		<form id="code_form" class="row" action="" method="post">
+
+		<form id="code-form" class="row" action="" method="post">
 		<div class="row">
 			<input type="text" value="" required name="filename_field" placeholder="Enter Filename (without extension)"/>
 			</div>
@@ -33,10 +38,8 @@
           <textarea name="std-input" id="stdin" class="materialize-textarea"></textarea>
           <label for="textarea1">Stdin (Enter input here)</label>
         </div>
-				<button style="margin-top:10px" class="waves-effect wave-teal btn" type="submit" onclick="getCodeSnippet()">Compile</button>
-
-<br> <br> 
-
+				<button style="margin-top:10px" class="waves-effect wave-teal btn" type="submit" onclick="dispatchCompilation()">Compile</button>
+<br><br> 
     </form>
 
 		<div class="row">
@@ -49,19 +52,19 @@
     {%- endfor -%}
       </p>
 		</div>
-
 	</div>
 </div>
+
 <script>
 var editor=null;
-var getCodeSnippet = function (){
+var dispatchCompilation = function () {
   $('#output').html("");
     $('#output').html("Compiling...<br>");
     var snippet=editor.getValue();
-    var textar=document.getElementById('textarea-code').value=snippet;
+    var textar=document.getElementById('textarea-code').value = snippet;
     $.getJSON('/compile',{
       filename:$('input[name="filename_field"]').val(),
-      source_code:textar,
+      source_code:editor.getValue(),
       stdin: $('#stdin').val()
     },function(data){
         $('#output').html(data.result);
@@ -69,13 +72,45 @@ var getCodeSnippet = function (){
     return false;
 } ;
 
-$('#code_form').submit(getCodeSnippet);
+$('#code-form').submit(dispatchCompilation);
 
-    window.onload = function init(){
+  $(document).ready(function() {
     editor = ace.edit("editor");
     editor.setTheme("ace/theme/monokai");
+    var selected_language = $(".languages option:selected").val();
     editor.getSession().setMode("ace/mode/java");
     editor.focus();
-}
+  });
+
+
+
+  function changeLanguage() {
+    var selected_language = $(".languages option:selected").val();
+    console.log(selected_language);
+    switch(selected_language) {
+        case "0":
+        console.log(editor);
+        editor.getSession().setMode("ace/mode/c");
+        editor.setValue("#include <stdio.h>\nint main() {\n\tprintf(\"Hello wold\");\n}\n");
+        break;
+        case "1":
+        editor.getSession().setMode("ace/mode/c");
+        editor.setValue("#include <iostream>\nusing namespace std;\nint main() {\n\tcout<<\"Hello wold\";\n}\n");
+        break;
+        case "2":
+        editor.getSession().setMode("ace/mode/rust");
+        editor.setValue("console.log(\"Hello world\")");
+        break;
+        case "3":
+        editor.getSession().setMode("ace/mode/rust");
+        editor.setValue("fn main() {\n\tprintln!(\"Hello World\");\n}\n");
+        break;
+        case "4":
+        editor.getSession().setMode("ace/mode/java");
+        editor.setValue("public class Sample {\t\npublic static void main() {\t\t\nSystem.out.println(\"Hello world\");\n}\n}\n");
+        break;
+    }
+  }
+
 </script>
 {% endblock %}
