@@ -5,8 +5,12 @@ Jinja2==2.8
 MarkupSafe==0.23
 Werkzeug==0.11.3
 argparse==1.2.1
+backports-abc==0.4
+backports.ssl-match-hostname==3.5.0.1
+certifi==2015.11.20.1
 decorator==4.0.6
-gunicorn==19.4.5
+ipython==4.0.3
+ipython-genutils==0.1.0
 itsdangerous==0.24
 path.py==8.1.2
 pexpect==4.0.1
@@ -15,5 +19,8 @@ psutil==3.4.2
 ptyprocess==0.5
 requests==2.9.1
 simplegeneric==0.8.1
+singledispatch==3.4.0.3
+six==1.10.0
+tornado==4.3
 traitlets==4.1.0
 wsgiref==0.1.2
