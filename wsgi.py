@@ -5,7 +5,9 @@ from tornado.wsgi import WSGIContainer
 from tornado.httpserver import HTTPServer
 from tornado.ioloop import IOLoop
 
-PORT = 5000
+import os
+
+PORT = int(os.environ.get("PORT",5000))
 
 http_server = HTTPServer(WSGIContainer(app))
 http_server.listen(PORT)
