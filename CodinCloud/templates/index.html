@@ -8,10 +8,10 @@
     <select onclick="changeLanguage()" class="languages browser-default">
       <option value="" selected>Choose Language</option>
       <option value="0">C</option>
-      <option value="1">C++</option>
-      <option value="2">NodeJS</option>
-      <option value="3">Rust</option>
-      <option value="4">Java</option>
+      <option value="1" disabled>C++</option>
+      <option value="2" disabled>NodeJS</option>
+      <option value="3" disabled>Rust</option>
+      <option value="4" disabled>Java</option>
       <label>Select Language</label>
     </select>
       </div>
@@ -81,8 +81,6 @@ $('#code-form').submit(dispatchCompilation);
     editor.getSession().setMode("ace/mode/java");
     editor.focus();
   });
-
-
 
   function changeLanguage() {
     var selected_language = $(".languages option:selected").val();
