@@ -1,24 +1,26 @@
-## pyjudge
+## CodinCloud
 
-PyJudge is an Compiler As a Service Platform
+CodinCloud is an Compiler As a Service Platform
 
 The website uses Flask Microframework as the backend, and MaterializeCSS on the Frontend.
 
-PyJudge is being updated for now, for better code organization.
+CodinCloud is being updated for now, for better code organization.
 
 The older version of this app is hosted @[flaskcompiler](https://flaskcompiler.herokuapp.com)
 
 ### Build Instructions:
 
-As a dependency you need :
+Its recommended to use virtualenv for a standalone developemnt environment for CodinCloud.
 
-@[Ace Editor](http://github.com/ajaxorg/ace/) - Editor used in PyJudge
+We have a shell script, which sets up everything that is needed to run CodinCloud. If you are not into a virtualenv environment, the script will setup one for you, then install all dependencies of Flask and then serve it on default port `5000`. You can override the port by passing it as an argument to script.
 
-Extract the (Ace Editor) repo to the static folder and then issue the command
+cmod the script `boostrap.sh` : `sudo chmod +x ./bootstrap.sh`
 
-`python app.py <port>`
+and then run it: `./boostrap.sh [port]`
 
-to run it on `localhost`
 
 TODO
+
 --Add Support for multiple languages
+
+--User Registration through Github

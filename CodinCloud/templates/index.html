@@ -18,10 +18,11 @@
 </div>
 
 	<div style="float:right" class="col s9">
-
 		<form id="code-form" class="row" action="" method="post">
 		<div class="row">
 			<input type="text" value="" required name="filename_field" placeholder="Enter Filename (without extension)"/>
+			<a onclick="incrFont()"><i class="material-icons">add</i></a>
+			<a onclick="decrFont()"><i class="material-icons">remove</i></a>
 			</div>
     
 			<div id="code-box" class="input-field">
@@ -84,10 +85,8 @@ $('#code-form').submit(dispatchCompilation);
 
   function changeLanguage() {
     var selected_language = $(".languages option:selected").val();
-    console.log(selected_language);
     switch(selected_language) {
         case "0":
-        console.log(editor);
         editor.getSession().setMode("ace/mode/c");
         editor.setValue("#include <stdio.h>\nint main() {\n\tprintf(\"Hello wold\");\n}\n");
         break;
@@ -109,6 +108,14 @@ $('#code-form').submit(dispatchCompilation);
         break;
     }
   }
+
+  function incrFont() {
+  	editor.setFontSize(parseInt(editor.getFontSize())+1);
+  };
+
+  function decrFont() {
+  	editor.setFontSize(parseInt(editor.getFontSize())-1);
+  };
 
 </script>
 {% endblock %}
