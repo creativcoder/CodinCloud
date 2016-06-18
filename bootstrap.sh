@@ -7,6 +7,7 @@ satisfy_dependencies() {
 }
 
 if [ -z $VIRTUAL_ENV ]; then
+	echo -e "Preparing your CodinCloud Environment...\n"
 	satisfy_dependencies
 fi
 
